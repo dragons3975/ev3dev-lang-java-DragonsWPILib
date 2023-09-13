@@ -38,6 +38,14 @@ public class EV3DevPlatforms {
 
         LOGGER.debug("Providing a EV3DevPlatforms instance");
 
+        if (System.getProperty("os.name").contains("Windows"))
+        {
+            platform = EV3DevPlatform.WINDOWS;
+            props = new Properties();
+            propPrefix = platform.getPropertyNamespace();
+            return;
+        }
+
         // load properties from jar
         final EV3DevPropertyLoader ev3DevPropertyLoader = new EV3DevPropertyLoader();
         props = ev3DevPropertyLoader.getEV3DevProperties();

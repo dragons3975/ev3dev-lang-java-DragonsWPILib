@@ -81,6 +81,10 @@ public class Battery extends EV3DevDevice implements Power {
      * @return voltage
      */
     public float getVoltage() {
+        if (CURRENT_PLATFORM == EV3DevPlatform.WINDOWS)
+        {
+            return 0;
+        }
         return Sysfs.readFloat(BATTERY_PATH_LOCAL + "/" + VOLTAGE) / 1000000;
     }
 

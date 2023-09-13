@@ -9,6 +9,7 @@ public enum EV3DevPlatform {
     PISTORMS("PISTORMS", "pistorms"),
     BRICKPI("BRICKPI",  "brickpi"),
     BRICKPI3("BRICKPI3", "brickpi3"),
+    WINDOWS("WINDOWS", "windows"),
     UNKNOWN("UNKNOWN",  "unknown");
 
     private final String platform;

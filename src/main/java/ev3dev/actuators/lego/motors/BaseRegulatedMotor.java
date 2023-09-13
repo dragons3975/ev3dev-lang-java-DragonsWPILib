@@ -10,6 +10,8 @@ import lejos.utility.Delay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -43,7 +45,7 @@ import java.util.List;
  * @author Andy Shaw
  * @author Juan Antonio Breña Moral
  */
-public abstract class BaseRegulatedMotor extends EV3DevMotorDevice implements RegulatedMotor {
+public abstract class BaseRegulatedMotor extends EV3DevMotorDevice implements RegulatedMotor, MotorController {
 
     private static final Logger log = LoggerFactory.getLogger(BaseRegulatedMotor.class);
 
@@ -56,6 +58,8 @@ public abstract class BaseRegulatedMotor extends EV3DevMotorDevice implements Re
     private boolean regulationFlag = true;
 
     private final List<RegulatedMotorListener> listenerList;
+
+    private boolean m_isInverted = false;
 
     /**
      * Constructor
@@ -441,6 +445,44 @@ public abstract class BaseRegulatedMotor extends EV3DevMotorDevice implements Re
     @Override
     public void endSynchronization() {
         log.warn("Not implemented the method: endSynchronization");
+    }
+
+    @Override
+    public void set(double speed) {
+        setSpeed((int)(speed*getMaxSpeed()));
+        if (m_isInverted)
+        {
+            backward();
+        }
+        else
+        {
+            forward();
+        }
+    }
+
+    @Override
+    public double get() {
+        return getSpeed()/getMaxSpeed();
+    }
+
+    @Override
+    public void setInverted(boolean isInverted) {
+        m_isInverted = isInverted;
+    }
+
+    @Override
+    public boolean getInverted() {
+        return m_isInverted;
+    }
+
+    @Override
+    public void disable() {
+        stopMotor();
+    }
+
+    @Override
+    public void stopMotor() {
+        stop();
     }
 
 }

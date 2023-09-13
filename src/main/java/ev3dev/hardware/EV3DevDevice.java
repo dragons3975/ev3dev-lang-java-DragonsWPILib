@@ -42,6 +42,13 @@ public abstract class EV3DevDevice {
      */
     public EV3DevDevice() {
 
+        if (System.getProperty("os.name").contains("Windows"))
+        {
+            CURRENT_PLATFORM = EV3DevPlatform.WINDOWS;
+            ev3DevProperties = new Properties();
+            return;
+        }
+
         final EV3DevPropertyLoader ev3DevPropertyLoader = new EV3DevPropertyLoader();
         ev3DevProperties = ev3DevPropertyLoader.getEV3DevProperties();
         final EV3DevPlatforms ev3DevPlatforms = EV3DevPlatforms.getInstance();
@@ -57,6 +64,10 @@ public abstract class EV3DevDevice {
      * @param portName port
      */
     protected void detect(final String type, final String portName) {
+        if (CURRENT_PLATFORM == EV3DevPlatform.WINDOWS)
+        {
+            return;
+        }
         final String devicePath = EV3DevFileSystem.getRootPath() + "/" + type;
         if (LOGGER.isTraceEnabled()) {
             LOGGER.trace("Retrieving devices in path: ", devicePath);
@@ -105,6 +116,10 @@ public abstract class EV3DevDevice {
      * @return value
      */
     protected String getStringAttribute(final String attribute) {
+        if (CURRENT_PLATFORM == EV3DevPlatform.WINDOWS)
+        {
+            return "";
+        }
         return Sysfs.readString(PATH_DEVICE + "/" + attribute);
     }
 
@@ -125,6 +140,10 @@ public abstract class EV3DevDevice {
      * @param value     value
      */
     protected void setStringAttribute(final String attribute, final String value) {
+        if (CURRENT_PLATFORM == EV3DevPlatform.WINDOWS)
+        {
+            return;
+        }
         final boolean result = Sysfs.writeString(this.PATH_DEVICE + "/" + attribute, value);
         if (!result) {
             throw new RuntimeException("Operation not executed: "

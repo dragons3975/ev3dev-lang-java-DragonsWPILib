@@ -68,6 +68,12 @@ public class Sound extends EV3DevDevice {
 
         LOGGER.info("Creating a instance of Sound");
 
+        if (CURRENT_PLATFORM == EV3DevPlatform.WINDOWS)
+        {
+            CURRENT_DISTRO = EV3DevDistro.STRETCH;
+            return;
+        }
+
         EV3_SOUND_PATH = Objects.nonNull(System.getProperty(EV3DEV_SOUND_KEY))
             ? System.getProperty(EV3DEV_SOUND_KEY) : EV3_PHYSICAL_SOUND_PATH;
         VOLUME_PATH = EV3_SOUND_PATH + "/" + VOLUME;
@@ -168,6 +174,10 @@ public class Sound extends EV3DevDevice {
      * @param volume 0-100
      */
     public void setVolume(final int volume) {
+        if (CURRENT_PLATFORM == EV3DevPlatform.WINDOWS)
+        {
+            return;
+        }
 
         this.volume = volume;
 
