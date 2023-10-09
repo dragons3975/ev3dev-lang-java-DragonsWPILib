@@ -15,7 +15,9 @@ public class EV3MediumRegulatedMotor extends BaseRegulatedMotor {
     private static final float HOLD_D = 0f;
     private static final int OFFSET = 1000;
 
-    private static final int MAX_SPEED = 260 * 360 / 60;
+    //private static final int MAX_SPEED = 260 * 360 / 60;
+    // Dragons : ça marche pas / tourne pas leur truc avec 260
+    private static final int MAX_SPEED = 210 * 360 / 60;
 
     /**
      * Constructor

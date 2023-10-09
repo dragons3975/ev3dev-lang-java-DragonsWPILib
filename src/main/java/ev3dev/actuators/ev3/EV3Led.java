@@ -59,31 +59,6 @@ public class EV3Led extends EV3DevDevice implements LED {
     }
 
     /**
-     * Creates an EV3LED object associated with the LED of the specified direction.
-     *
-     * @param button the direction of the LED, should be either {@link #LEFT} or {@link #RIGHT}.
-     * @throws RuntimeException if LED feature is not supported on the current platform.
-     * @deprecated Use {@link #EV3Led(Direction)} instead.
-     */
-    public EV3Led(final int button) {
-        checkPlatform();
-
-        if (button == LEFT) {
-            LED_RED = ev3DevProperties.getProperty("ev3.led.left.red");
-            LED_GREEN = ev3DevProperties.getProperty("ev3.led.left.green");
-            direction = Direction.LEFT;
-        } else if (button == RIGHT) {
-            LED_RED = ev3DevProperties.getProperty("ev3.led.right.red");
-            LED_GREEN = ev3DevProperties.getProperty("ev3.led.right.green");
-            direction = Direction.RIGHT;
-        } else {
-            log.error("You are not specifying any button.");
-            throw new IllegalArgumentException("You are not specifying any button.");
-        }
-
-    }
-
-    /**
      * Checks if the current platform support this feature.
      *
      * @throws RuntimeException if this feature is not supported on the current platform.

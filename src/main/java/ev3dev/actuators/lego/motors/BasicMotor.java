@@ -38,7 +38,9 @@ public abstract class BasicMotor extends EV3DevMotorDevice implements DCMotor {
         supportedUnregulatedMotors.add(EV3DevPlatform.BRICKPI3);
 
         if (!supportedUnregulatedMotors.contains(CURRENT_PLATFORM)) {
-            throw new RuntimeException("This device is not supported in the platform: " + CURRENT_PLATFORM);
+            //throw new RuntimeException("This device is not supported in the platform: " + CURRENT_PLATFORM);
+            // Dragons : on est sur Windows. C'est ce qu'on veut.
+            return;
         }
 
         final EV3DevPlatforms ev3DevPlatforms = EV3DevPlatforms.getInstance();

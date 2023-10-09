@@ -96,10 +96,10 @@ public abstract class BaseRegulatedMotor extends EV3DevMotorDevice implements Re
             log.debug("Setting port in mode: {}", TACHO_MOTOR);
         }
         this.setStringAttribute(MODE, TACHO_MOTOR);
-        Delay.msDelay(1000);
+        Delay.msDelay(2000); // Dragons : the robot is very busy at load time, take time.
         this.detect(TACHO_MOTOR, port);
         //TODO Review to implement asynchronous solution
-        Delay.msDelay(1000);
+        Delay.msDelay(2000); // Dragons : the robot is very busy at load time, take time.
         this.setStringAttribute(COMMAND, RESET);
         if (log.isDebugEnabled()) {
             log.debug("Motor ready to use on Port: {}", motorPort.getName());
