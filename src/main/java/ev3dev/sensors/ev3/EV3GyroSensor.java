@@ -32,8 +32,8 @@ public class EV3GyroSensor extends BaseSensor {
     private static final String MODE_ANGLE = "GYRO-ANG";
     private static final String MODE_RATE_ANGLE = "GYRO-G&A";
 
-    private final SampleProvider mSampleProvider = getAngleMode();
-    private float[] mSample = new float[mSampleProvider.sampleSize()];
+    private final SampleProvider mSampleProvider;
+    private float[] mSample;
 
     /**
      * Constructor
@@ -51,6 +51,9 @@ public class EV3GyroSensor extends BaseSensor {
             new GenericMode(this.PATH_DEVICE, 2, "Angle and Rate",
                 -Float.MAX_VALUE, +Float.MAX_VALUE, 1.0f),
         });
+
+        mSampleProvider = getAngleMode();
+        mSample = new float[mSampleProvider.sampleSize()];
     }
 
     /**
