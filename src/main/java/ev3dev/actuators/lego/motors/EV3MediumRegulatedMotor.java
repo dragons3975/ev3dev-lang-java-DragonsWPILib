@@ -28,4 +28,9 @@ public class EV3MediumRegulatedMotor extends BaseRegulatedMotor {
         super(motorPort, MOVE_P, MOVE_I, MOVE_D, HOLD_P, HOLD_I, HOLD_D, OFFSET, MAX_SPEED);
     }
 
+    @Override
+    public void set(final double speed) {
+        super.set(Math.min(Math.max(speed, -1), 1));
+    }
+
 }
