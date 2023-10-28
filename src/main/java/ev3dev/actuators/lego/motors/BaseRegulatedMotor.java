@@ -10,6 +10,7 @@ import lejos.utility.Delay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -275,6 +276,8 @@ public abstract class BaseRegulatedMotor extends EV3DevMotorDevice implements Re
     }
 
     private void setSpeedDirect(int speed) {
+        if (DriverStation.isDisabled())
+            speed = 0;
         if (!this.regulationFlag) {
             this.setIntegerAttribute(DUTY_CYCLE, speed);
         } else {
