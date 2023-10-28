@@ -1,6 +1,7 @@
 package ev3dev.actuators.lego.motors;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import lejos.hardware.port.Port;
 
 /**
@@ -18,6 +19,7 @@ public class UnregulatedMotor extends BasicMotor implements MotorController {
      */
     public UnregulatedMotor(final Port portName) {
         super(portName);
+        CommandScheduler.getInstance().addMotor(this);
     }
     
     @Override

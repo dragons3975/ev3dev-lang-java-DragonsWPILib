@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -104,6 +105,8 @@ public abstract class BaseRegulatedMotor extends EV3DevMotorDevice implements Re
         if (log.isDebugEnabled()) {
             log.debug("Motor ready to use on Port: {}", motorPort.getName());
         }
+
+        CommandScheduler.getInstance().addMotor(this);
     }
 
     /**
